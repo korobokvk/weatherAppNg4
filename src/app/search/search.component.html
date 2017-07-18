@@ -1,14 +1,29 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(cityName)">
-  <label for="city">City</label>
-  <input type="text" id="city" formControlName="cityName" [(ngModel)]="cityName">
-  <button type="submit" [disabled]="!myForm.controls.cityName.valid">Add City</button>
-
+  <input placeholder="Type city name (New York, US)" class="form-control" type="text" id="city" formControlName="cityName" [(ngModel)]="cityName">
+  <button  class="btn btn-default" type="submit" [disabled]="!myForm.controls.cityName.valid">Add City</button>
   <small [hidden]="myForm.controls.cityName.valid || (myForm.controls.cityName.pristine && !submitted)">
-    Name is required (minimum 5 characters).
+    Name is required.
   </small>
 </form>
-<ul>
-  <li></li>
-  <li></li>
-  <li></li>
-</ul>
+
+<div [hidden]="!onError" class="alert alert-danger">Whoops, something wrong!</div>
+<table [hidden]="onError" class="table table-striped">
+  <thead>
+  <tr>
+    <th>City</th>
+    <th>Temperature</th>
+    <th>Sky</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr  [@flyInOut]='state' *ngFor="let item of weather" [ngClass]='{deleteItem: item.del}'>
+    <td>{{item.name}}</td>
+    <td>{{item.main.temp}} C</td>
+    <td>{{item.weather[0].main}}</td>
+    <td><img src='http://openweathermap.org/img/w/{{item.weather[0].icon}}.png' alt=""></td>
+    <td>
+      <button class="btn btn-danger" (click)="item.del = !item.del">Delete</button></td>
+  </tr>
+  </tbody>
+</table>

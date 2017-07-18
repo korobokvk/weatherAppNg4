@@ -1,7 +1,22 @@
-<ul>
-  <label>Locale Weather</label>
-  <li>{{weather?.name}}</li>
-  <li>{{weather?.weather[0].description}}</li>
-  <li>{{weather?.main['temp']}}</li>
-</ul>
-<app-search></app-search>
+<header >
+  <h1>Weather App</h1>
+  <h3>Description: This app working with OpenWeather API data and build on Angular 4. Created by Maksym Zakshevskiy</h3>
+</header>
+<div class="container-fluid">
+  <div class="row lab bg-info">
+  Local Weather
+  <div *ngFor="let item of weather">
+    <div class="city bg-info text-white col-sm-6 col-xs-6 col-md-6">City:</div>
+    <div class="name bg-info text-white col-sm-6 col-xs-6 col-md-6">{{item.name}}</div>
+    <div class="temp bg-info text-white col-sm-6 col-xs-6 col-md-6">Temperature:</div>
+    <div class="main bg-info text-white col-sm-6 col-xs-6 col-md-6">{{item.main.temp}} C</div>
+    <div class="sky bg-info text-white col-sm-6 col-xs-6 col-md-6">Sky:</div>
+    <div class="weath bg-info text-white col-sm-6 col-xs-6 col-md-6">{{item.weather[0].main}}</div>
+    <div class="weath bg-info text-white col-sm-12 col-xs-12 col-md-12"><img src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" alt=""></div>
+
+
+
+
+    <app-search></app-search>
+</div>
+</div>

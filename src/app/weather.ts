@@ -7,4 +7,12 @@ export class Weather {
  main: Main;
  sys: Sys;
  weather: Array<Sky>;
+
+ constructor(name: string, base: string, main: Main, sys: Sys, weather: Array<Sky>) {
+   this.name = name;
+   this.base = base;
+   this.main = main;
+   this.sys = sys;
+   this.weather = weather;
+ }
 }
