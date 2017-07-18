@@ -1,4 +1,4 @@
-import {   Component, trigger, state, style, transition, animate, keyframes } from '@angular/core';
+import {   Component, trigger, state, style, transition, animate, keyframes, ViewChild } from '@angular/core';
 import { FormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Weather } from '../weather';
 import { SearchByCityNameService } from './search-by-city-name.service';
@@ -27,6 +27,7 @@ import {Sky} from '../sky';
   providers: [SearchByCityNameService]
 })
 export class SearchComponent {
+  cityName: string = null;
   state: string = 'inactive';
   weather: Weather[] = [];
   onError = '';
@@ -38,9 +39,10 @@ export class SearchComponent {
     this.service.apiMethod(cityName).subscribe((data: Response) => {
         this.state = (this.state === 'inactive' ? 'active' : 'inactive');
         this.onError = '';
+        this.cityName = '';
        this.addWeather(data.json().name, data.json().base, data.json().main, data.json().sys, data.json().weather);
        },
-      error => this.onError = error.json().message
+      error => { this.onError = error.json().message; this.weather = []}
     );
   }
   addWeather(name: string, base: string, main: Main, sys: Sys, weather: Array<Sky>) {
