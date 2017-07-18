@@ -1,0 +1,14 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(cityName)">
+  <label for="city">City</label>
+  <input type="text" id="city" formControlName="cityName" [(ngModel)]="cityName">
+  <button type="submit" [disabled]="!myForm.controls.cityName.valid">Add City</button>
+
+  <small [hidden]="myForm.controls.cityName.valid || (myForm.controls.cityName.pristine && !submitted)">
+    Name is required (minimum 5 characters).
+  </small>
+</form>
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
