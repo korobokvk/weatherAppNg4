@@ -1,22 +1,27 @@
-<header >
-  <h1>Weather App</h1>
-  <h3>Description: This app working with OpenWeather API data and build on Angular 4. Created by Maksym Zakshevskiy</h3>
-</header>
-<div class="container-fluid">
-  <div class="row lab bg-info">
-  Local Weather
-  <div *ngFor="let item of weather">
-    <div class="city bg-info text-white col-sm-6 col-xs-6 col-md-6">City:</div>
-    <div class="name bg-info text-white col-sm-6 col-xs-6 col-md-6">{{item.name}}</div>
-    <div class="temp bg-info text-white col-sm-6 col-xs-6 col-md-6">Temperature:</div>
-    <div class="main bg-info text-white col-sm-6 col-xs-6 col-md-6">{{item.main.temp}} C</div>
-    <div class="sky bg-info text-white col-sm-6 col-xs-6 col-md-6">Sky:</div>
-    <div class="weath bg-info text-white col-sm-6 col-xs-6 col-md-6">{{item.weather[0].main}}</div>
-    <div class="weath bg-info text-white col-sm-12 col-xs-12 col-md-12"><img src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" alt=""></div>
+<div class="main">
+  <div class="container">
+    <header >
+      <h1>Weather App</h1>
+      <h3>Description: This app working with OpenWeather API data and build on Angular 4. Created by Maksym Zakshevskiy</h3>
+    </header>
 
+    <div [hidden]="onError" class="row">
+      <div class="lab" *ngFor="let item of weather">
+        <div [@visibilityChanged]='hide' class="favorites" ></div>
+        <!--<div class="event" (click)="hide = !hide"></div>-->
+        <div>Local Weather</div>
+      <div  [hidden]="!onError" class="alert alert-danger">I don't now where are you. You are hiding from me? :(</div>
 
-
-
-    <app-search></app-search>
-</div>
+        <div class="name text-white col-sm-6 col-xs-6 col-md-6">
+          <span>{{item.name}}</span>
+          <span class="tempSpan">{{item.main.temp}} °C</span>
+          <span class="skySpan">{{item.weather[0].main}}</span>
+        </div>
+        <div class="weath text-white col-sm-6 col-xs-6 col-md-6">
+          <img class="image" src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" alt="">
+        </div>
+        <app-search></app-search>
+      </div>
+    </div>
+  </div>
 </div>

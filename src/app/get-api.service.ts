@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import {AppID } from './AppID';
 import { appURL } from './appURL';
 import { Weather } from './weather';
-import {Observable} from "rxjs/Observable";
+import {Observable} from 'rxjs/Observable';
 
 
 
@@ -15,9 +15,11 @@ export class GetApiService {
   apiMethod(): Observable<any> {
     return Observable.create(observer => {
       this.service.getLocation().subscribe((getApi) => {
-      this.http.get(getApi).subscribe(data => {
+      this.http.get(`${appURL}lat=${getApi.coords.latitude}&lon=${getApi.coords.longitude}&units=metric${AppID}`).subscribe(data => {
         observer.next(data);
-      });
+      },
+      error => observer.error(error)
+      );
     });
     });
 }

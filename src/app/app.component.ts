@@ -1,30 +1,43 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, trigger, state, style, transition, animate} from '@angular/core';
 import { LocationService } from './location.service';
 import { Weather } from './weather';
-import { Http, Response } from '@angular/http';
-import {GetApiService} from './get-api.service';
-import {Sky} from './sky';
-import {Sys} from './sys';
-import {Main} from './main';
+import { Response } from '@angular/http';
+import { GetApiService } from './get-api.service';
+import { GetData } from './GetData';
+
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [LocationService, GetApiService]
+  animations: [
+    trigger('visibilityChanged', [
+      state('true' , style({ opacity: 1, transform: 'translateX(0%)' })),
+      state('false', style({ opacity: 0, transform: 'translate(-50%)'  })),
+      transition('1 => 0', animate('100ms')),
+      transition('0 => 1', animate('300ms'))
+    ])
+  ],
+  providers: [LocationService, GetApiService, GetData]
 })
 export class AppComponent implements OnInit {
+  hide = true;
   weather: Weather[] = [];
-  constructor(private service: GetApiService) {}
-  addWeather(name: string, base: string, main: Main, sys: Sys, weather: Array<Sky>) {
-    this.weather.push(new Weather(name, base, main, sys, weather));
-  }
+  onError = null;
+
+  constructor(private service: GetApiService, private getData: GetData) {}
+  // hideEl() {
+  //   this.hide = !this.hide;
+  // }
 
   ngOnInit() {
    this.service.apiMethod().subscribe((data: Response) => {
-     this.addWeather(data.json().name, data.json().base, data.json().main, data.json().sys, data.json().weather);
-   });
+     this.onError = null;
+     this.getData.addWeather(data.json().name, data.json().base, data.json().main, data.json().sys, data.json().weather, this.weather);
+   },
+     error => { this.onError = error.json().message; this.weather = []; },
+   );
    }
   }
 

@@ -1,2 +1,17 @@
 .deleteItem { display: none }
+form {
+  display: inline-block;
+  float: left;
 
+}
+input {
+  display: inline-block;
+}
+button {
+  display: inline-block;
+}
+table {
+  display: inline-block;
+  float: none;
+  width: auto;
+}

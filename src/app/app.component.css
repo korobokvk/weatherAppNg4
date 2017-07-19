@@ -1,1 +1,49 @@
-.lab { text-align: center; font-weight: bold }
+.lab {
+  font-weight: bold;
+  height: 500px;
+  background-color: rgba(235,0,235, 0.3);
+}
+
+
+.favorites {
+  display: inline-block;
+  float: left;
+  width: 20%;
+  height: 100%;
+  border: 1px solid #ccc;
+  letter-spacing: normal;
+  background-color: lightgrey;
+}
+
+.weath {
+  display: inline-block;
+  width: auto;
+  color: white;
+  line-height: normal;
+  text-align: left;
+
+}
+
+.tempSpan {
+  font-size: 30px;
+  display: inline-block;
+}
+.skySpan {
+  font-size: 20px;
+  display: inline-block;
+}
+.event {
+  display: inline-block;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+}
+.hidden {
+  display: none;
+}
+.name {
+  color: white;
+  font-size: 70px;
+
+}

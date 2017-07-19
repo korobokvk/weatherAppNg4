@@ -1,12 +1,11 @@
-import {   Component, trigger, state, style, transition, animate, keyframes, ViewChild } from '@angular/core';
-import { FormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, trigger, state, style, transition, animate } from '@angular/core';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Weather } from '../weather';
 import { SearchByCityNameService } from './search-by-city-name.service';
 import { Response } from '@angular/http';
-import {Main} from '../main';
-import {Sys} from '../sys';
-import {Sky} from '../sky';
-// import {trigger, state, style, animate, transition } from '@angular/animations';
+import { GetData } from '../GetData';
+
+
 
 @Component({
   selector: 'app-search',
@@ -24,29 +23,27 @@ import {Sky} from '../sky';
       ])
     ])
   ],
-  providers: [SearchByCityNameService]
+  providers: [SearchByCityNameService, GetData]
 })
 export class SearchComponent {
   cityName: string = null;
-  state: string = 'inactive';
+  state = 'inactive';
   weather: Weather[] = [];
   onError = '';
-  constructor(private service: SearchByCityNameService) { }
+
+  constructor(private service: SearchByCityNameService, private getData: GetData) { }
   myForm: FormGroup = new FormGroup({
     'cityName': new FormControl('', <any>Validators.required)
   });
+
   onSubmit(cityName: string) {
     this.service.apiMethod(cityName).subscribe((data: Response) => {
         this.state = (this.state === 'inactive' ? 'active' : 'inactive');
         this.onError = '';
         this.cityName = '';
-       this.addWeather(data.json().name, data.json().base, data.json().main, data.json().sys, data.json().weather);
+       this.getData.addWeather(data.json().name, data.json().base, data.json().main, data.json().sys, data.json().weather, this.weather);
        },
       error => { this.onError = error.json().message; this.weather = []}
     );
-  }
-  addWeather(name: string, base: string, main: Main, sys: Sys, weather: Array<Sky>) {
-      this.weather.push(new Weather(name, base, main, sys, weather));
-      console.log(this.weather);
   }
 }
