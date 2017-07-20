@@ -13,12 +13,12 @@ import { GetData } from '../GetData';
   styleUrls: ['./search.component.css'],
   animations: [
     trigger('flyInOut', [
-      state('in', style({transform: 'translateX(0)'})),
+      state('true', style({transform: 'translateX(0)'})),
       transition('void => *', [
         style({transform: 'translateX(-100%)'}),
         animate(100)
       ]),
-      transition('* => void', [
+      transition('void => *', [
         animate(100, style({transform: 'translateX(100%)'}))
       ])
     ])
@@ -27,7 +27,8 @@ import { GetData } from '../GetData';
 })
 export class SearchComponent {
   cityName: string = null;
-  state = 'inactive';
+  over = false;
+  choose = false;
   weather: Weather[] = [];
   onError = '';
 
@@ -38,7 +39,6 @@ export class SearchComponent {
 
   onSubmit(cityName: string) {
     this.service.apiMethod(cityName).subscribe((data: Response) => {
-        this.state = (this.state === 'inactive' ? 'active' : 'inactive');
         this.onError = '';
         this.cityName = '';
        this.getData.addWeather(data.json().name, data.json().base, data.json().main, data.json().sys, data.json().weather, this.weather);

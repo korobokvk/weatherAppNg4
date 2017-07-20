@@ -1,3 +1,4 @@
+<div class="col-sm-4 cop-xs-4 col-md-4 ">
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(cityName)">
   <input placeholder="Type city name (New York, US)" class="form-control" type="text" id="city" formControlName="cityName" [(ngModel)]="cityName">
   <button  class="btn btn-default" type="submit" [disabled]="!myForm.controls.cityName.valid">Add City</button>
@@ -5,15 +6,16 @@
     Name is required.
   </small>
 </form>
-
+</div>
+<div class="col-sm-4 cop-xs-4 col-md-4 ">
 <div [hidden]="!onError" class="alert alert-danger">Whoops, something wrong!</div>
-<table [hidden]="onError" class="table table-striped">
+<table [hidden]="onError">
   <thead>
   <tr>
     <th>City</th>
     <th>Temperature</th>
     <th>Sky</th>
-    <th></th>
+
   </tr>
   </thead>
   <tbody>
@@ -23,7 +25,9 @@
     <td>{{item.weather[0].main}}</td>
     <td><img src='http://openweathermap.org/img/w/{{item.weather[0].icon}}.png' alt=""></td>
     <td>
-      <button class="btn btn-danger" (click)="item.del = !item.del">Delete</button></td>
+      <button class="btn btn-danger" (click)="item.del = !item.del;" [@flyInOut]='state'>Delete</button></td>
+    <td><i [ngClass]="{'fa-star-o': !over,  'fa-star': over || choose}" (click)="over = !over" [ngStyle]="{'cursor': 'pointer'}" class="fa" aria-hidden="true"></i></td>
   </tr>
   </tbody>
 </table>
+</div>

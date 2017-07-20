@@ -15,3 +15,11 @@ table {
   float: none;
   width: auto;
 }
+th {
+  padding-right: 50px;
+  padding-top: 20px;
+  color: white;
+}
+td {
+  color: white;
+}

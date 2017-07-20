@@ -1,27 +1,27 @@
 <div class="main">
   <div class="container">
     <header >
-      <h1>Weather App</h1>
-      <h3>Description: This app working with OpenWeather API data and build on Angular 4. Created by Maksym Zakshevskiy</h3>
+      <h1 class="title">Weather App</h1>
+      <h3 class="decription">Description: This app working with OpenWeather API data and build on Angular 4. Created by Maksym Zakshevskiy</h3>
     </header>
 
     <div [hidden]="onError" class="row">
       <div class="lab" *ngFor="let item of weather">
-        <div [@visibilityChanged]='hide' class="favorites" ></div>
-        <!--<div class="event" (click)="hide = !hide"></div>-->
+
+        <div [@visibilityChanged]='hide' class="favorites" >Favorites City</div>
+        <div class="event" ><i (click)="hide = !hide" [ngClass]="{'fa-arrow-right': !hide, 'fa-arrow-left': hide}" class="fa" aria-hidden="true"></i></div>
+
         <div>Local Weather</div>
       <div  [hidden]="!onError" class="alert alert-danger">I don't now where are you. You are hiding from me? :(</div>
 
-        <div class="name text-white col-sm-6 col-xs-6 col-md-6">
-          <span>{{item.name}}</span>
-          <span class="tempSpan">{{item.main.temp}} °C</span>
-          <span class="skySpan">{{item.weather[0].main}}</span>
-        </div>
-        <div class="weath text-white col-sm-6 col-xs-6 col-md-6">
-          <img class="image" src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" alt="">
+        <div class="name text-white col-sm-4 col-xs-4 col-md-4">
+          <span class="tempSpan">{{item.main.temp}}°C</span><br>
+          <span class="nameSpan">{{item.name}} </span>
+          <span class="skySpan">{{item.weather[0].main}} <img class="image" src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" alt=""></span>
         </div>
         <app-search></app-search>
       </div>
     </div>
+    </div>
   </div>
-</div>
+

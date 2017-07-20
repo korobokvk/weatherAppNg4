@@ -1,7 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Kumar+One+Outline');
 .lab {
   font-weight: bold;
-  height: 500px;
-  background-color: rgba(235,0,235, 0.3);
+  display: inline-block;
+  height: 100%;
+  min-height: 300px;
+  width: 100%;
+  background-color: rgba(255,255,255, 0.5);
+  position: relative;
 }
 
 
@@ -10,9 +15,14 @@
   float: left;
   width: 20%;
   height: 100%;
+  min-height: 300px;
   border: 1px solid #ccc;
   letter-spacing: normal;
   background-color: lightgrey;
+  text-align: center;
+  color: white;
+
+  line-height: 50px;
 }
 
 .weath {
@@ -25,25 +35,45 @@
 }
 
 .tempSpan {
-  font-size: 30px;
   display: inline-block;
+  font-size: 70px;
 }
 .skySpan {
   font-size: 20px;
   display: inline-block;
 }
+.nameSpan {
+  font-size: 30px;
+  display: block;
+}
+.image {
+  display: block;
+
+}
 .event {
   display: inline-block;
   position: absolute;
-  width: 100px;
-  height: 100px;
-  background-color: #fff;
+  left: 5px;
+  color: white;
+
 }
 .hidden {
   display: none;
 }
 .name {
   color: white;
-  font-size: 70px;
 
+}
+.title {
+  text-align: center;
+  color: white;
+  font-family: 'Kumar One Outline', cursive;
+}
+.decription {
+  text-align: left;
+  color: white;
+  font-size: 10px;
+}
+.decription::before {
+  content: "*"
 }

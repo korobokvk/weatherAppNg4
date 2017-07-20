@@ -22,14 +22,12 @@ import { GetData } from './GetData';
   providers: [LocationService, GetApiService, GetData]
 })
 export class AppComponent implements OnInit {
-  hide = true;
+  hide = false;
   weather: Weather[] = [];
   onError = null;
 
   constructor(private service: GetApiService, private getData: GetData) {}
-  // hideEl() {
-  //   this.hide = !this.hide;
-  // }
+
 
   ngOnInit() {
    this.service.apiMethod().subscribe((data: Response) => {
