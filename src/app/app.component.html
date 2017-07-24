@@ -2,13 +2,23 @@
   <div class="container">
     <header >
       <h1 class="title">Weather App</h1>
-      <h3 class="decription">Description: This app working with OpenWeather API data and build on Angular 4. Created by Maksym Zakshevskiy</h3>
+      <h3 class="decription">Description: This app working with OpenWeather API data and build on Angular 4. Created by
+        <a href="mailto:korobokvk@gmail.com">Maksym Zakshevskiy</a></h3>
     </header>
 
     <div [hidden]="onError" class="row">
       <div class="lab" *ngFor="let item of weather">
+        <div class="fav2"></div>
+        <div [@visibilityChanged]='hide' class="favorites" >Favorites City
+          <div *ngFor="let items of cityHash" >
+            <span >{{items}}</span>
 
-        <div [@visibilityChanged]='hide' class="favorites" >Favorites City</div>
+          <!--<div *ngFor="let i of citiesItem">-->
+            <!--<span>{{i.main.temp}} C</span>-->
+            <!--<span>{{i.weather[0].main}}</span>-->
+          <!--</div>-->
+        </div>
+        </div>
         <div class="event" ><i (click)="hide = !hide" [ngClass]="{'fa-arrow-right': !hide, 'fa-arrow-left': hide}" class="fa" aria-hidden="true"></i></div>
 
         <div>Local Weather</div>
@@ -19,7 +29,7 @@
           <span class="nameSpan">{{item.name}} </span>
           <span class="skySpan">{{item.weather[0].main}} <img class="image" src="http://openweathermap.org/img/w/{{item.weather[0].icon}}.png" alt=""></span>
         </div>
-        <app-search></app-search>
+        <app-search (countUpdate)="getVal($event)"></app-search>
       </div>
     </div>
     </div>

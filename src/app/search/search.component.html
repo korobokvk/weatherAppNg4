@@ -19,14 +19,15 @@
   </tr>
   </thead>
   <tbody>
-  <tr  [@flyInOut]='state' *ngFor="let item of weather" [ngClass]='{deleteItem: item.del}'>
+  <tr  [@flyInOut]='state' *ngFor="let item of weather"  [ngClass]='{deleteItem: item.del}' >
     <td>{{item.name}}</td>
     <td>{{item.main.temp}} C</td>
     <td>{{item.weather[0].main}}</td>
     <td><img src='http://openweathermap.org/img/w/{{item.weather[0].icon}}.png' alt=""></td>
     <td>
-      <button class="btn btn-danger" (click)="item.del = !item.del;" [@flyInOut]='state'>Delete</button></td>
-    <td><i [ngClass]="{'fa-star-o': !over,  'fa-star': over || choose}" (click)="over = !over" [ngStyle]="{'cursor': 'pointer'}" class="fa" aria-hidden="true"></i></td>
+      <button class="btn btn-danger" (click)="item.del = !item.del;" [@flyInOut]='state'>Delete</button>
+    </td>
+    <td><i [ngClass]="{'fa-star-o': !over,  'fa-star': over || choose}" (click)="over = !over; TakeCity(item.name)"  [ngStyle]="{'cursor': 'pointer'}"  class="fa"></i></td>
   </tr>
   </tbody>
 </table>
